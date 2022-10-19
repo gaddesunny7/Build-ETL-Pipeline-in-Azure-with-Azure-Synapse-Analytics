@@ -1,0 +1,54 @@
+{
+    "name": "GetFileNameFromAdlsGen2",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "azsnworkspacenamedevaz-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "filedetails": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": {
+                    "value": "@dataset().filedetails",
+                    "type": "Expression"
+                },
+                "folderPath": "retail_data_20221015",
+                "fileSystem": "azsynfileaccountdevaz"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "ItemID",
+                "type": "String"
+            },
+            {
+                "name": "Segment",
+                "type": "String"
+            },
+            {
+                "name": "Category",
+                "type": "String"
+            },
+            {
+                "name": "Buyer",
+                "type": "String"
+            },
+            {
+                "name": "FamilyNane",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

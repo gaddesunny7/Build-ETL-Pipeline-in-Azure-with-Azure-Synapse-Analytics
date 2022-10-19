@@ -1,0 +1,53 @@
+{
+    "name": "MetaDataFileNameFromAdlsGen2",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "azsnworkspacenamedevaz-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "folderPath": "retail_data_20221015",
+                "fileSystem": "azsynfileaccountdevaz"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "DistrictID",
+                "type": "String"
+            },
+            {
+                "name": "District",
+                "type": "String"
+            },
+            {
+                "name": "DM",
+                "type": "String"
+            },
+            {
+                "name": "DM_Pic_fl",
+                "type": "String"
+            },
+            {
+                "name": "DM_Pic",
+                "type": "String"
+            },
+            {
+                "name": "BusinessUnitID",
+                "type": "String"
+            },
+            {
+                "name": "DMImage",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

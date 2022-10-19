@@ -1,0 +1,324 @@
+{
+    "name": "001_ppl_adls_to_syndwh",
+    "properties": {
+        "description": "This pipeline is used to load all the data from the storage account to the tables in the synapse dedicated pool",
+        "activities": [
+            {
+                "name": "GetFileName",
+                "type": "GetMetadata",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "MetaDataFileNameFromAdlsGen2",
+                        "type": "DatasetReference"
+                    },
+                    "fieldList": [
+                        "childItems"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobFSReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    },
+                    "formatSettings": {
+                        "type": "DelimitedTextReadSettings"
+                    }
+                }
+            },
+            {
+                "name": "ForEachFileName",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "GetFileName",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@activity('GetFileName').output.childItems",
+                        "type": "Expression"
+                    },
+                    "isSequential": true,
+                    "activities": [
+                        {
+                            "name": "SetFileName",
+                            "type": "SetVariable",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "file_name",
+                                "value": {
+                                    "value": "@split(item().name,'.')[0]",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Switch1",
+                            "type": "Switch",
+                            "dependsOn": [
+                                {
+                                    "activity": "SetFileName",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                },
+                                {
+                                    "activity": "Set FileTypeName",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "on": {
+                                    "value": "@variables('file_name')",
+                                    "type": "Expression"
+                                },
+                                "cases": [
+                                    {
+                                        "value": "item",
+                                        "activities": [
+                                            {
+                                                "name": "TransformDataAndLoadItemTable",
+                                                "type": "ExecuteDataFlow",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "dataflow": {
+                                                        "referenceName": "DataFlowItem",
+                                                        "type": "DataFlowReference",
+                                                        "parameters": {
+                                                            "filename": {
+                                                                "value": "'@{variables('file_type')}'",
+                                                                "type": "Expression"
+                                                            }
+                                                        },
+                                                        "datasetParameters": {
+                                                            "ReadCsvFile": {
+                                                                "filedetails": {
+                                                                    "value": "@variables('file_type')",
+                                                                    "type": "Expression"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "staging": {
+                                                        "linkedService": {
+                                                            "referenceName": "azsnworkspacenamedevaz-WorkspaceDefaultStorage",
+                                                            "type": "LinkedServiceReference"
+                                                        },
+                                                        "folderPath": "azsynfileaccountdevaz/synapse"
+                                                    },
+                                                    "compute": {
+                                                        "coreCount": 8,
+                                                        "computeType": "General"
+                                                    },
+                                                    "traceLevel": "Fine"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "value": "store",
+                                        "activities": [
+                                            {
+                                                "name": "TransformDataAndLoadStoreTable",
+                                                "type": "ExecuteDataFlow",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "dataflow": {
+                                                        "referenceName": "DataflowStore",
+                                                        "type": "DataFlowReference",
+                                                        "parameters": {
+                                                            "filename": {
+                                                                "value": "'@{variables('file_type')}'",
+                                                                "type": "Expression"
+                                                            }
+                                                        },
+                                                        "datasetParameters": {
+                                                            "ReadCsvFile": {
+                                                                "filedetails": {
+                                                                    "value": "@variables('file_type')",
+                                                                    "type": "Expression"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "staging": {
+                                                        "linkedService": {
+                                                            "referenceName": "azsnworkspacenamedevaz-WorkspaceDefaultStorage",
+                                                            "type": "LinkedServiceReference"
+                                                        },
+                                                        "folderPath": "azsynfileaccountdevaz/synapse"
+                                                    },
+                                                    "compute": {
+                                                        "coreCount": 8,
+                                                        "computeType": "General"
+                                                    },
+                                                    "traceLevel": "Fine"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "value": "district",
+                                        "activities": [
+                                            {
+                                                "name": "TransformDataAndLoadDistrict",
+                                                "type": "ExecuteDataFlow",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "dataflow": {
+                                                        "referenceName": "DataflowDistrict",
+                                                        "type": "DataFlowReference",
+                                                        "parameters": {
+                                                            "filename": {
+                                                                "value": "'@{variables('file_type')}'",
+                                                                "type": "Expression"
+                                                            }
+                                                        },
+                                                        "datasetParameters": {
+                                                            "ReadCsvFile": {
+                                                                "filedetails": {
+                                                                    "value": "@variables('file_type')",
+                                                                    "type": "Expression"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "staging": {
+                                                        "linkedService": {
+                                                            "referenceName": "azsnworkspacenamedevaz-WorkspaceDefaultStorage",
+                                                            "type": "LinkedServiceReference"
+                                                        },
+                                                        "folderPath": "azsynfileaccountdevaz/synapse/workspaces"
+                                                    },
+                                                    "compute": {
+                                                        "coreCount": 8,
+                                                        "computeType": "General"
+                                                    },
+                                                    "traceLevel": "Fine"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "value": "time",
+                                        "activities": [
+                                            {
+                                                "name": "TransformDataAndLoadDateAndTime",
+                                                "type": "ExecuteDataFlow",
+                                                "dependsOn": [],
+                                                "policy": {
+                                                    "timeout": "0.12:00:00",
+                                                    "retry": 0,
+                                                    "retryIntervalInSeconds": 30,
+                                                    "secureOutput": false,
+                                                    "secureInput": false
+                                                },
+                                                "userProperties": [],
+                                                "typeProperties": {
+                                                    "dataflow": {
+                                                        "referenceName": "DataflowDateAndTime",
+                                                        "type": "DataFlowReference",
+                                                        "parameters": {
+                                                            "filename": {
+                                                                "value": "'@{variables('file_name')}'",
+                                                                "type": "Expression"
+                                                            }
+                                                        },
+                                                        "datasetParameters": {
+                                                            "ReadCsvFile": {
+                                                                "filedetails": {
+                                                                    "value": "@variables('file_type')",
+                                                                    "type": "Expression"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "staging": {
+                                                        "linkedService": {
+                                                            "referenceName": "azsnworkspacenamedevaz-WorkspaceDefaultStorage",
+                                                            "type": "LinkedServiceReference"
+                                                        },
+                                                        "folderPath": "azsynfileaccountdevaz/synapse/workspaces"
+                                                    },
+                                                    "compute": {
+                                                        "coreCount": 8,
+                                                        "computeType": "General"
+                                                    },
+                                                    "traceLevel": "Fine"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Set FileTypeName",
+                            "type": "SetVariable",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "file_type",
+                                "value": {
+                                    "value": "@item().name",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "variables": {
+            "file_name": {
+                "type": "String"
+            },
+            "file_type": {
+                "type": "String"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-10-15T16:43:40Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

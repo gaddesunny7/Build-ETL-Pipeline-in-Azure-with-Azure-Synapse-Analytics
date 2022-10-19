@@ -1,0 +1,22 @@
+{
+    "now": "2022-10-15T20:25:10.568Z",
+    "perfNow": 18452990.30000019,
+    "diagnosticCorrelation": "57d8035a-dacc-4f23-95a6-9e2f1671885b",
+    "source": "DownloadSupportFiles",
+    "environment": {
+        "productName": "a365",
+        "buildVersion": "22.1012.19",
+        "environmentType": 9,
+        "resourceName": "azsnworkspacenamedevaz",
+        "resourceRegion": "eastus",
+        "resourceGroup": "rg-dev-az",
+        "subscriptionId": "1402005a-ca8f-406a-9604-4fdf4e4ac846",
+        "sessionId": "fSCzo",
+        "operationId": "Pnhey",
+        "gitType": "live"
+    },
+    "additionalInfo": {
+        "selectedResource": "001_ppl_adls_to_syndwh",
+        "selectedResourceType": "pipeline"
+    }
+}

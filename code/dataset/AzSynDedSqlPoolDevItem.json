@@ -1,0 +1,54 @@
+{
+    "name": "AzSynDedSqlPoolDevItem",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureSynapseAnalyticsDedicatedSqlPool",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "item_id",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "segment",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "category",
+                "type": "nvarchar"
+            },
+            {
+                "name": "first_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "last_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "family_nane",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "load_date",
+                "type": "datetime2",
+                "scale": 0
+            },
+            {
+                "name": "record_source",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "item"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

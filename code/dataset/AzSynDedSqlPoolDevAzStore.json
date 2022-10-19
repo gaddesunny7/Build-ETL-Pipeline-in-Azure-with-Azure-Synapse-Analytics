@@ -1,0 +1,81 @@
+{
+    "name": "AzSynDedSqlPoolDevAzStore",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureSynapseAnalyticsDedicatedSqlPool",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "location_id",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "city_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "territory",
+                "type": "nvarchar"
+            },
+            {
+                "name": "postal_code",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "open_date",
+                "type": "datetime2",
+                "scale": 0
+            },
+            {
+                "name": "selling_area_size",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "district_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "store_number",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "chain",
+                "type": "nvarchar"
+            },
+            {
+                "name": "district_id",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "store_tye",
+                "type": "nvarchar"
+            },
+            {
+                "name": "load_date",
+                "type": "datetime2",
+                "scale": 0
+            },
+            {
+                "name": "record_source",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "store"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

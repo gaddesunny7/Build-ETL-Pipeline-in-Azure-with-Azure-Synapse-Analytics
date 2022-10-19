@@ -1,0 +1,50 @@
+{
+    "name": "AzSynDedPoolDevAz",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureSynapseAnalyticsDedicatedSqlPool",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "reporting_period_id",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "period",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "fiscal_year",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "fiscal_month",
+                "type": "nvarchar"
+            },
+            {
+                "name": "date",
+                "type": "date"
+            },
+            {
+                "name": "load_date",
+                "type": "datetime2",
+                "scale": 0
+            },
+            {
+                "name": "record_source",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "date_time"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

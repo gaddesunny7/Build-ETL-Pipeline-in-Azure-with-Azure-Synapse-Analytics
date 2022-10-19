@@ -1,0 +1,6 @@
+selected resource name:		001_ppl_adls_to_syndwh
+selected resource type:		pipeline
+workspace name:			azsnworkspacenamedevaz
+workspace location:		eastus
+subscription id:		1402005a-ca8f-406a-9604-4fdf4e4ac846
+time of download (UTC):		Sat, 15 Oct 2022 20:25:10 GMT
