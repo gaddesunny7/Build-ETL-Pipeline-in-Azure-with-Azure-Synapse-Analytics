@@ -2,27 +2,37 @@
 ETL (Extract, Transform and Load) E-Commerce Data using Azure Data Factory (ADF) and Azure Synapse Analytics
 
 ## Description
-The aim of this project, is to  Extract the data from the Azure Data Lake Storage and load as well as transform data in the Parquet Format for better performance and analyze the data in Azure Databricks using PySpark and Spark SQL
+The aim of this project, is to  Extract the data from the Azure Data Lake Storage and transform data in Azure Data Factory and load it into the Synapse DWH using Dedicated SQL Pool. Additionally Creating a Dimensional Data Modelling and visualizing it through PowerBI
 
 ## Getting Started
 
 ## Architecture Diagram
 ![](img/architecture.png)
 
+## Data Pipeline (Loop Items using GetMetaData Activity)
+![](img/4.png)
+
+## Data Pipeline 
+![](img/5.png)
+
+## Data Pipeline (Data Flow) 
+![](img/6.png)
+
+## Data Pipeline (Transformation) 
+![](img/7.png)
+
 ## Dataset
-- Yelp Dataset ( https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset )
-- The Yelp academic dataset JSON file is converted to Parquet format and further Parquet format is converted to the Delta format for further data analysis
-  in Databricks.
+- Retail Dataset ( https://docs.microsoft.com/en-us/power-bi/sample-retail-analysis )
 
 ## Services
-- Azure Databricks
+- Azure Data Factory
 - Azure Data Lake Storage
+- Azure Synapse Analytics
+- PowerBI
 
 ## Language
-- PySpark
-- Spark SQL
+- SQL
 
 ## Data Formats
-- JSON
-- Parquet
-- Delta
+- csv
+
