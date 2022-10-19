@@ -34,5 +34,9 @@ The aim of this project, is to  Extract the data from the Azure Data Lake Storag
 - SQL
 
 ## Data Formats
-- csv
+- CSV
 
+
+## Future Work
+- Data Modelling
+- Data Visualization using PowerBI
