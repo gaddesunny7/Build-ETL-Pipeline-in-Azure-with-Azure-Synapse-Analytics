@@ -3,79 +3,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[date_time]
-( 
-	[reporting_period_id] [int]  NOT NULL,
-	[period] [int]  NOT NULL,
-	[fiscal_year] [int]  NOT NULL,
-	[fiscal_month] [nvarchar](100)  NULL,
-	[date] [date]  NOT NULL,
-	[load_date] [datetime2](0)  NOT NULL,
-	[record_source] [nvarchar](100)  NULL
-)
-WITH
-(
-	DISTRIBUTION = ROUND_ROBIN,
-	CLUSTERED COLUMNSTORE INDEX
-)
-GO
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[district]
-( 
-	[district_id] [int]  NOT NULL,
-	[district] [nvarchar](500)  NOT NULL,
-	[dm] [nvarchar](500)  NOT NULL,
-	[dm_pic_fl] [nvarchar](1000)  NOT NULL,
-	[dm_pic] [nvarchar](1000)  NOT NULL,
-	[business_unit_id] [int]  NOT NULL,
-	[dm_image] [nvarchar](100)  NULL,
-	[load_date] [datetime2](0)  NOT NULL,
-	[record_source] [nvarchar](100)  NULL
-)
-WITH
-(
-	DISTRIBUTION = ROUND_ROBIN,
-	CLUSTERED COLUMNSTORE INDEX
-)
-GO
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[item]
-( 
-	[item_id] [int]  NOT NULL,
-	[segment] [int]  NOT NULL,
-	[category] [nvarchar](200)  NOT NULL,
-	[first_name] [nvarchar](500)  NOT NULL,
-	[last_name] [nvarchar](500)  NOT NULL,
-	[family_nane] [int]  NOT NULL,
-	[load_date] [datetime2](0)  NOT NULL,
-	[record_source] [nvarchar](500)  NULL
-)
-WITH
-(
-	DISTRIBUTION = ROUND_ROBIN,
-	CLUSTERED COLUMNSTORE INDEX
-)
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[store]
 ( 
 	[location_id] [int]  NOT NULL,
@@ -100,13 +27,6 @@ WITH
 )
 GO
 
-
-
-
-
-
-
-
 CREATE TABLE dbo.item
     (
      [item_id] INT,
@@ -126,10 +46,6 @@ WITH
      -- HEAP
     )
 GO
-
-
-dedicated_sql_pool_dev_az
-
 
 
 CREATE TABLE dbo.time
@@ -152,9 +68,6 @@ WITH
 GO
 
 
-
-
-
 CREATE TABLE dbo.district
     (
      [district_id] INT NOT NULL,
@@ -162,9 +75,9 @@ CREATE TABLE dbo.district
      [dm] NVARCHAR(500) NOT NULL,
      [dm_pic_fl] NVARCHAR(1000) NOT NULL,
      [dm_pic] NVARCHAR(1000) NOT NULL,
-	 [business_unit_id] INT NOT NULL,
-	 [dm_image] NVARCHAR(100) NULL,
-	 [load_date] DATETIME2(0) NOT NULL,
+     [business_unit_id] INT NOT NULL, 
+     [dm_image] NVARCHAR(100) NULL,
+     [load_date] DATETIME2(0) NOT NULL,
      [record_source] NVARCHAR(100)
      
     )
@@ -175,9 +88,3 @@ WITH
      -- HEAP
     )
 GO
-
-
-DistrictID	District	DM	DM_Pic_fl	DM_Pic	BusinessUnitID	DMImage
-
-
-currentTimestamp()
