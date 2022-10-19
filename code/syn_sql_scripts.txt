@@ -1,0 +1,183 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[date_time]
+( 
+	[reporting_period_id] [int]  NOT NULL,
+	[period] [int]  NOT NULL,
+	[fiscal_year] [int]  NOT NULL,
+	[fiscal_month] [nvarchar](100)  NULL,
+	[date] [date]  NOT NULL,
+	[load_date] [datetime2](0)  NOT NULL,
+	[record_source] [nvarchar](100)  NULL
+)
+WITH
+(
+	DISTRIBUTION = ROUND_ROBIN,
+	CLUSTERED COLUMNSTORE INDEX
+)
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[district]
+( 
+	[district_id] [int]  NOT NULL,
+	[district] [nvarchar](500)  NOT NULL,
+	[dm] [nvarchar](500)  NOT NULL,
+	[dm_pic_fl] [nvarchar](1000)  NOT NULL,
+	[dm_pic] [nvarchar](1000)  NOT NULL,
+	[business_unit_id] [int]  NOT NULL,
+	[dm_image] [nvarchar](100)  NULL,
+	[load_date] [datetime2](0)  NOT NULL,
+	[record_source] [nvarchar](100)  NULL
+)
+WITH
+(
+	DISTRIBUTION = ROUND_ROBIN,
+	CLUSTERED COLUMNSTORE INDEX
+)
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[item]
+( 
+	[item_id] [int]  NOT NULL,
+	[segment] [int]  NOT NULL,
+	[category] [nvarchar](200)  NOT NULL,
+	[first_name] [nvarchar](500)  NOT NULL,
+	[last_name] [nvarchar](500)  NOT NULL,
+	[family_nane] [int]  NOT NULL,
+	[load_date] [datetime2](0)  NOT NULL,
+	[record_source] [nvarchar](500)  NULL
+)
+WITH
+(
+	DISTRIBUTION = ROUND_ROBIN,
+	CLUSTERED COLUMNSTORE INDEX
+)
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[store]
+( 
+	[location_id] [int]  NOT NULL,
+	[city_name] [nvarchar](500)  NOT NULL,
+	[territory] [nvarchar](20)  NOT NULL,
+	[postal_code] [int]  NOT NULL,
+	[open_date] [datetime2](0)  NOT NULL,
+	[selling_area_size] [int]  NOT NULL,
+	[district_name] [nvarchar](1000)  NOT NULL,
+	[name] [nvarchar](1000)  NOT NULL,
+	[store_number] [int]  NOT NULL,
+	[chain] [nvarchar](500)  NOT NULL,
+	[district_id] [int]  NOT NULL,
+	[store_type] [nvarchar](200)  NOT NULL,
+	[load_date] [datetime2](0)  NOT NULL,
+	[record_source] [nvarchar](500)  NULL
+)
+WITH
+(
+	DISTRIBUTION = ROUND_ROBIN,
+	CLUSTERED COLUMNSTORE INDEX
+)
+GO
+
+
+
+
+
+
+
+
+CREATE TABLE dbo.item
+    (
+     [item_id] INT,
+     [segment] INT,
+     [category] INT,
+     [first_name] NVARCHAR(1000),
+     [last_name] NVARCHAR(1000),
+     [family_nane] INT,
+     [load_date] NVARCHAR(1000),
+     [record_source] NVARCHAR(1000)
+     
+    )
+WITH
+    (
+    DISTRIBUTION = ROUND_ROBIN,
+     CLUSTERED COLUMNSTORE INDEX
+     -- HEAP
+    )
+GO
+
+
+dedicated_sql_pool_dev_az
+
+
+
+CREATE TABLE dbo.time
+    (
+     [reporting_period_id] INT NOT NULL,
+     [period] INT NOT NULL,
+     [fiscal_year] INT NOT NULL,
+     [fiscal_month] NVARCHAR(100) NULL,
+     [date] DATE NOT NULL,
+	 [load_date] DATETIME2(0) NOT NULL,
+     [record_source] NVARCHAR(100)
+     
+    )
+WITH
+    (
+    DISTRIBUTION = ROUND_ROBIN,
+     CLUSTERED COLUMNSTORE INDEX
+     -- HEAP
+    )
+GO
+
+
+
+
+
+CREATE TABLE dbo.district
+    (
+     [district_id] INT NOT NULL,
+     [district] NVARCHAR(500) NOT NULL,
+     [dm] NVARCHAR(500) NOT NULL,
+     [dm_pic_fl] NVARCHAR(1000) NOT NULL,
+     [dm_pic] NVARCHAR(1000) NOT NULL,
+	 [business_unit_id] INT NOT NULL,
+	 [dm_image] NVARCHAR(100) NULL,
+	 [load_date] DATETIME2(0) NOT NULL,
+     [record_source] NVARCHAR(100)
+     
+    )
+WITH
+    (
+    DISTRIBUTION = ROUND_ROBIN,
+     CLUSTERED COLUMNSTORE INDEX
+     -- HEAP
+    )
+GO
+
+
+DistrictID	District	DM	DM_Pic_fl	DM_Pic	BusinessUnitID	DMImage
+
+
+currentTimestamp()
