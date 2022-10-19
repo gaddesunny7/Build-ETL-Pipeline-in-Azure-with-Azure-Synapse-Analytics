@@ -16,10 +16,10 @@ The aim of this project, is to  Extract the data from the Azure Data Lake Storag
 ![](img/5.png)
 
 ## Data Pipeline (Data Flow) 
-![](img/6.png)
+![](img/7.png)
 
 ## Data Pipeline (Transformation) 
-![](img/7.png)
+![](img/6.png)
 
 ## Dataset
 - Retail Dataset ( https://docs.microsoft.com/en-us/power-bi/sample-retail-analysis )
