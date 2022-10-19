@@ -1,5 +1,5 @@
 # Build-ETL-Pipeline-in-Azure-with-Azure-Synapse-Analytics
-Analysis and Visualisation of Yelp Dataset using Azure Databricks
+ETL (Extract, Transform and Load) E-Commerce Data using Azure Data Factory (ADF) and Azure Synapse Analytics
 
 ## Description
 The aim of this project, is to  Extract the data from the Azure Data Lake Storage and load as well as transform data in the Parquet Format for better performance and analyze the data in Azure Databricks using PySpark and Spark SQL
