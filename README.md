@@ -1,5 +1,5 @@
 # Build-ETL-Pipeline-in-Azure-with-Azure-Synapse-Analytics
-ETL (Extract, Transform and Load) E-Commerce Data using Azure Data Factory (ADF) and Azure Synapse Analytics
+ETL (Extract, Transform and Load) E-Commerce Data using Azure Data Factory (ADF) and Azure Synapse Analytics (Data Warehouse)
 
 ## Description
 The aim of this project, is to  Extract the data from the Azure Data Lake Storage and transform data in Azure Data Factory and load it into the Synapse DWH using Dedicated SQL Pool. Additionally Creating a Dimensional Data Modelling and visualizing it through PowerBI
