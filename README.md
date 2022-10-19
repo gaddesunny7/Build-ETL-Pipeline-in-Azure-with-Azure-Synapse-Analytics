@@ -7,7 +7,7 @@ The aim of this project, is to  Extract the data from the Azure Data Lake Storag
 ## Getting Started
 
 ## Architecture Diagram
-![](img/architecture_1.png)
+![](img/architecture.png)
 
 ## Dataset
 - Yelp Dataset ( https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset )
