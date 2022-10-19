@@ -9,6 +9,9 @@ The aim of this project, is to  Extract the data from the Azure Data Lake Storag
 ## Architecture Diagram
 ![](img/architecture.png)
 
+## Dataset
+- Retail Dataset ( https://docs.microsoft.com/en-us/power-bi/sample-retail-analysis )
+
 ## Data Pipeline (Loop Items using GetMetaData Activity)
 ![](img/4.png)
 
@@ -20,9 +23,6 @@ The aim of this project, is to  Extract the data from the Azure Data Lake Storag
 
 ## Data Pipeline (Transformation) 
 ![](img/6.png)
-
-## Dataset
-- Retail Dataset ( https://docs.microsoft.com/en-us/power-bi/sample-retail-analysis )
 
 ## Services
 - Azure Data Factory
